@@ -64,10 +64,13 @@ box.showBox();
 
     public static <T extends Object> void changePlace(T[] items) {
         if (items.length == 1) System.out.println("Nothing to change");
-        else {
-            T temp = items[0];
-            items[0] = items[1];
-            items[1] = temp;
+        for (int i = 0; i <items.length ; i++) {
+            if (i>=items.length-2) break;
+            else{
+                T temp = items[i];
+                i++;
+                items[i-1] = items[i];
+                items[i] = temp;}
         }
     }
 
