@@ -2,7 +2,6 @@ package lesson01.generics;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Box<A extends Fruit> implements Comparable<Box> {
 

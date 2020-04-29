@@ -19,8 +19,6 @@ public class Main {
         //Задание 2
         changeArr(string);
         changeArr(objects);
-//        chageArr(arr);
-
 
         //Задание 3
     Apple apple = new Apple(1.5f);
