@@ -6,6 +6,7 @@ public class MainJdbcClass {
 
     private static Connection connection;
     private static Statement statement;
+    private static PreparedStatement preparedStatement;
 
     /**
      * CREATE TABLE students (
@@ -20,20 +21,38 @@ public class MainJdbcClass {
             connect();
             performDropDB();
             performCreateDB();
-            long t = System.currentTimeMillis();
+            prepareStatement();
+//            performInsert5Students();
+//            performUpdateDB();
+//            performDelete();
 
-            for (int i = 1; i <= 5; i++) {
-                statement.executeUpdate("INSERT INTO students (name, score) VALUES ('student" + i + "', " + i * 10 % 100 + ");");
-            }
+        statement.executeUpdate("INSERT INTO students (name, score) values ('student1', 10);");
+        Savepoint savepoint = connection.setSavepoint();
+        statement.executeUpdate("INSERT INTO students (name, score) values ('student2', 20);");
+        connection.rollback(savepoint);
+        statement.executeUpdate("INSERT INTO students (name, score) values ('student3', 30);");
 
             selectFromDB();
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             disconnect();
         }
 
+    }
+
+    private static void performDelete() throws SQLException {
+        statement.executeUpdate("DELETE FROM students where id = 1");
+    }
+
+    private static void performUpdateDB() throws SQLException {
+        statement.executeUpdate("UPDATE students SET score = 100, name = 'student'");
+    }
+
+    private static void performInsert5Students() throws SQLException {
+        for (int i = 1; i <= 5; i++) {
+            statement.executeUpdate("INSERT INTO students (name, score) VALUES ('student" + i + "', " + i * 10 % 100 + ");");
+        }
     }
 
     private static void performInsertDB() throws SQLException {
@@ -63,8 +82,8 @@ public class MainJdbcClass {
         ResultSet resultSet = statement.executeQuery("SELECT * FROM students");
         while (resultSet.next()) {
             System.out.println(
-                    resultSet.getInt(1) + " " +
-                            resultSet.getString("name") + " " +
+                    resultSet.getInt(1) + " | " +
+                            resultSet.getString("name") + " | " +
                             resultSet.getInt(3));
         }
     }
@@ -73,6 +92,18 @@ public class MainJdbcClass {
         Class.forName("org.sqlite.JDBC");
         connection = DriverManager.getConnection("jdbc:sqlite:main.db");
         statement = connection.createStatement();
+    }
+
+    private static void prepareStatement() throws SQLException {
+        preparedStatement = connection.prepareStatement("INSERT INTO students (name, score) VALUES (?, ?)");
+
+//        for (int i = 1; i <= 5; i++) {
+//            preparedStatement.setString(1, "student" + i);
+//            preparedStatement.setInt(2, i * 10 % 100);
+//            preparedStatement.addBatch();
+//        }
+//        preparedStatement.executeBatch();
+
     }
 
     private static void disconnect() {
