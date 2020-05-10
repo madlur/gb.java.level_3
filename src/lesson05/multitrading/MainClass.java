@@ -1,9 +1,11 @@
 package lesson05.multitrading;
 
-import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MainClass {
     public static final int CARS_COUNT = 4;
+    public static final AtomicBoolean ab = new AtomicBoolean(false);
+
     public static void main(String[] args) {
         System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Подготовка!!!");
         Race race = new Race(new Road(60), new Tunnel(), new Road(40));
