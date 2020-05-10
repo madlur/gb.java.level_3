@@ -1,8 +1,5 @@
 package lesson05.multitrading;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 public class MainClass {
     public static final int CARS_COUNT = 4;
     public static void main(String[] args) {
