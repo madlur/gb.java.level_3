@@ -3,7 +3,6 @@ package lesson05.multitrading;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Car implements Runnable {
     private static int CARS_COUNT;
@@ -14,6 +13,8 @@ public class Car implements Runnable {
     private int speed;
     private String name;
     static CyclicBarrier cb = new CyclicBarrier(MainClass.CARS_COUNT);
+    static CountDownLatch cdl = new CountDownLatch(MainClass.CARS_COUNT);
+    static CountDownLatch cdl2 = new CountDownLatch(MainClass.CARS_COUNT);
     public String getName() {
         return name;
     }
@@ -32,6 +33,7 @@ public class Car implements Runnable {
             System.out.println(this.name + " готовится");
             Thread.sleep(500 + (int)(Math.random() * 800));
             System.out.println(this.name + " готов");
+            cdl2.countDown();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -43,5 +45,6 @@ public class Car implements Runnable {
         for (int i = 0; i < race.getStages().size(); i++) {
             race.getStages().get(i).go(this);
         }
+        cdl.countDown();
     }
 }
