@@ -3,9 +3,58 @@ package lesson01.generics;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class Box<A extends Fruit> implements Comparable<Box> {
+public class Box <A extends Fruit> {
 
-    private ArrayList<A> arrlist = new ArrayList<>();
+//                      ******** teacher`s realization  ********
+
+    private ArrayList<A> fruits;
+
+    public Box(A... fruits) {
+        this.fruits = new ArrayList<>(Arrays.asList(fruits));
+
+    }
+
+    public Box() {
+        this.fruits = new ArrayList<>();
+    }
+
+    private void addFruit(A fruit) {
+        this.fruits.add(fruit);
+    }
+
+    private float getWeight(){
+        float sum = 0f;
+        for (A fruits : fruits) {
+            sum += fruits.getWeight();
+        }
+        return sum;
+    }
+
+    private boolean compare (Box another) {
+        return Math.abs(this.getWeight() - another.getWeight()) < 0.00001;
+    }
+        private void moveTo (Box<A> another) {
+            if (another != null) {
+                System.out.println("Another box is null");
+            }
+            if (another.fruits.isEmpty()) {
+                System.out.println("Another box is empty");
+            }
+            if (this.equals(another)) {
+                System.out.println("Another box is equals to current");
+            }
+           this.fruits.addAll(another.fruits);
+            another.fruits.clear();
+        }
+
+    }
+
+    /*
+    public Box(ArrayList<A> arrlist) {
+        this.arrlist = arrlist;
+    }
+
+
 
     public void putInBox(A obj) {
         arrlist.add(obj);
@@ -30,7 +79,8 @@ public class Box<A extends Fruit> implements Comparable<Box> {
         return arrlist;
     }
 
-    public float compare(Box o) {
+    //добавлено в параметры метода <?> вместо просто (Box o) после просмотра видео с разбором ДЗ
+    public float compare(Box<?> o) {
         return (this.getWeight(this.getArrlist()) - o.getWeight(o.getArrlist()));
     }
 
@@ -48,5 +98,5 @@ public class Box<A extends Fruit> implements Comparable<Box> {
         return 0;
     }
 
+*/
 
-}
