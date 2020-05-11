@@ -12,9 +12,9 @@ public class Car implements Runnable {
     private Race race;
     private int speed;
     private String name;
-    static CyclicBarrier cb = new CyclicBarrier(MainClass.CARS_COUNT);
-    static CountDownLatch cdl = new CountDownLatch(MainClass.CARS_COUNT);
-    static CountDownLatch cdl2 = new CountDownLatch(MainClass.CARS_COUNT);
+     CyclicBarrier cb ;
+     CountDownLatch cdl;
+     CountDownLatch cdl2;
     public String getName() {
         return name;
     }
@@ -26,6 +26,13 @@ public class Car implements Runnable {
         this.speed = speed;
         CARS_COUNT++;
         this.name = "Участник #" + CARS_COUNT;
+    }
+    public Car(Race race, int speed,CyclicBarrier cb, CountDownLatch cdl, CountDownLatch cdl2){
+        this(race, speed);
+        this.cb = cb;
+        this.cdl = cdl;
+        this.cdl2=cdl2;
+
     }
     @Override
     public void run() {
