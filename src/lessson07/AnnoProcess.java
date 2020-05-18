@@ -30,7 +30,7 @@ public class AnnoProcess {
             if (priority.isAnnotationPresent(Test.class)) {
                 priority.setAccessible(true);
                 if (priority.getAnnotation(Test.class).priority() > BEFORE_SUIT_PLACE) {
-                    BEFORE_SUIT_PLACE = priority.getAnnotation(Test.class).priority();
+                    BEFORE_SUIT_PLACE = priority.getAnnotation(Test.class).priority()+1;
                 }
             }
         }
