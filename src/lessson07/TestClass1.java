@@ -28,6 +28,12 @@ public class TestClass1 {
         System.out.println("1. testmethod № 5 from class " + getClass().getSimpleName() + " is running");
     }
 
+    @Test()
+    private void testmethod6() {
+        System.out.println("1. testmethod № 6 Метод с одинаковым приоритетом из" + getClass().getSimpleName() + " is running");
+    }
+
+
     @AfterSuite
     private void someAfterSuiteMethod() {
         System.out.println("The End. Some after suite method from class" + getClass().getSimpleName() + " is running");

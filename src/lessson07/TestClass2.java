@@ -8,7 +8,7 @@ public class TestClass2 {
         System.out.println("4. testmethod № 1 from class " + getClass().getSimpleName() + " is running");
     }
 
-    @Test(priority = 9)
+    @Test(priority = 6)
     private void testmethod2() {
         System.out.println("9. testmethod № 2 from class " + getClass().getSimpleName() + " is running");
     }
