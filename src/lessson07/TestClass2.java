@@ -10,7 +10,7 @@ public class TestClass2 {
 
     @Test(priority = 6)
     private void testmethod2() {
-        System.out.println("9. testmethod № 2 from class " + getClass().getSimpleName() + " is running");
+        System.out.println("6. testmethod № 2 from class " + getClass().getSimpleName() + " is running");
     }
 
     @Test(priority = 8)
